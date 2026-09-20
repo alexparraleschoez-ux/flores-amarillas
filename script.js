@@ -187,31 +187,21 @@ function secuenciaAnimacion() {
     }, 75000);
 }
 
-// ===== CONSTRUIR RAMO CORAZÓN (DINÁMICO - SE ADAPTA A CUALQUIER PANTALLA) =====
+// ===== CONSTRUIR RAMO CORAZÓN (COORDENADAS FIJAS - SIEMPRE PERFECTO) =====
 function construirRamo() {
     const contenedorFlores = document.getElementById('flores-ramo');
     if (!contenedorFlores) return;
     contenedorFlores.innerHTML = '';
     
-    console.log('🌻 Construyendo corazón dinámico...');
-    
-    // Obtener dimensiones REALES del contenedor
-    const anchoContenedor = contenedorFlores.offsetWidth || 400;
-    const altoContenedor = contenedorFlores.offsetHeight || 400;
-    
-    console.log('📏 Tamaño contenedor:', anchoContenedor, 'x', altoContenedor);
+    console.log('🌻 Construyendo corazón...');
     
     const emojisFlor = ['🌻', '🌻', '', '🌼', '🌼', '🌼', '🌼', '', '🌸', '🌸'];
     const numeroFlores = 50;
     
-    // Centro DINÁMICO del contenedor
-    const centroX = anchoContenedor / 2;
-    const centroY = altoContenedor / 2 - 20;
-    
-    // Escala dinámica basada en el tamaño del contenedor
-    const escala = Math.min(anchoContenedor, altoContenedor) / 45;
-    
-    console.log('📍 Centro:', centroX, centroY, '| Escala:', escala);
+    // Coordenadas FIJAS basadas en contenedor de 400x400
+    const centroX = 200;
+    const centroY = 180;
+    const escala = 9;
     
     const coordenadas = [];
     
@@ -224,7 +214,7 @@ function construirRamo() {
         coordenadas.push([px, py]);
     }
     
-    console.log('📍 Coordenadas generadas:', coordenadas.length);
+    console.log('📍 Coordenadas:', coordenadas.length);
     
     coordenadas.forEach((coord, index) => {
         setTimeout(() => {
@@ -232,13 +222,13 @@ function construirRamo() {
             flor.classList.add('flor-individual');
             
             const random = Math.random();
-            if (random < 0.5) flor.textContent = '';
+            if (random < 0.5) flor.textContent = '🌻';
             else if (random < 0.9) flor.textContent = '🌼';
             else flor.textContent = '🌸';
             
             flor.style.left = coord[0] + 'px';
             flor.style.top = coord[1] + 'px';
-            flor.style.fontSize = (escala * 0.22) + 'rem';
+            flor.style.fontSize = '2rem';
             flor.style.zIndex = '3';
             
             // INTERACTIVIDAD
