@@ -187,26 +187,41 @@ function secuenciaAnimacion() {
     }, 75000);
 }
 
-// ===== CONSTRUIR RAMO CORAZÓN =====
+// ===== CONSTRUIR RAMO CORAZÓN (DINÁMICO - SE ADAPTA A CUALQUIER PANTALLA) =====
 function construirRamo() {
     const contenedorFlores = document.getElementById('flores-ramo');
     if (!contenedorFlores) return;
     contenedorFlores.innerHTML = '';
     
-    console.log('🌻 Construyendo corazón...');
+    console.log('🌻 Construyendo corazón dinámico...');
     
-    const emojisFlor = ['🌻', '🌻', '🌻', '🌼', '🌼', '🌼', '🌼', '🌼', '🌸', '🌸'];
+    // Obtener dimensiones REALES del contenedor
+    const anchoContenedor = contenedorFlores.offsetWidth || 400;
+    const altoContenedor = contenedorFlores.offsetHeight || 400;
+    
+    console.log('📏 Tamaño contenedor:', anchoContenedor, 'x', altoContenedor);
+    
+    const emojisFlor = ['🌻', '🌻', '', '🌼', '🌼', '🌼', '🌼', '', '🌸', '🌸'];
     const numeroFlores = 50;
-    const centroX = 200;
-    const centroY = 180;
-    const escala = 9;
+    
+    // Centro DINÁMICO del contenedor
+    const centroX = anchoContenedor / 2;
+    const centroY = altoContenedor / 2 - 20;
+    
+    // Escala dinámica basada en el tamaño del contenedor
+    const escala = Math.min(anchoContenedor, altoContenedor) / 45;
+    
+    console.log('📍 Centro:', centroX, centroY, '| Escala:', escala);
+    
     const coordenadas = [];
     
     for (let i = 0; i < numeroFlores; i++) {
         const t = (i / numeroFlores) * Math.PI * 2;
         const x = 16 * Math.pow(Math.sin(t), 3);
         const y = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
-        coordenadas.push([centroX + x * escala, centroY - y * escala]);
+        const px = centroX + x * escala;
+        const py = centroY - y * escala;
+        coordenadas.push([px, py]);
     }
     
     console.log('📍 Coordenadas generadas:', coordenadas.length);
@@ -217,19 +232,19 @@ function construirRamo() {
             flor.classList.add('flor-individual');
             
             const random = Math.random();
-            if (random < 0.5) flor.textContent = '🌻';
+            if (random < 0.5) flor.textContent = '';
             else if (random < 0.9) flor.textContent = '🌼';
             else flor.textContent = '🌸';
             
             flor.style.left = coord[0] + 'px';
             flor.style.top = coord[1] + 'px';
-            flor.style.fontSize = '2rem';
+            flor.style.fontSize = (escala * 0.22) + 'rem';
             flor.style.zIndex = '3';
             
-            // INTERACTIVIDAD: Click y Touch para explotar
+            // INTERACTIVIDAD
             flor.addEventListener('click', (e) => explotarFlor(e, flor));
             flor.addEventListener('touchstart', (e) => {
-                e.preventDefault(); // Evita zoom o scroll en móviles
+                e.preventDefault();
                 explotarFlor(e, flor);
             }, { passive: false });
             

@@ -161,11 +161,12 @@ body {
     z-index: 10;
 }
 
-/* ===== RAMO ===== */
+/* ===== RAMO DE FLORES ===== */
 #ramo-construccion {
     position: relative;
     width: 400px;
     height: 450px;
+    margin: 0 auto; /* CENTRADO HORIZONTAL */
     z-index: 5;
     transition: all 1.5s ease;
 }
@@ -197,9 +198,10 @@ body {
 
 .flores-ramo {
     position: absolute;
-    top: 0; left: 0;
-    width: 400px;
-    height: 400px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     z-index: 2;
 }
 
@@ -221,19 +223,10 @@ body {
 }
 
 .flor-individual:hover {
-    transform: scale(1.3) rotate(15deg);
+    transform: scale(1.3) rotate(15deg) !important;
     filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.9));
     z-index: 10;
     cursor: pointer;
-}
-
-/* Partícula de explosión */
-.particula-explosion {
-    position: absolute;
-    font-size: 1.5rem;
-    pointer-events: none;
-    z-index: 100;
-    transition: all 1s ease-out;
 }
 
 .corona-ramo {
@@ -276,12 +269,10 @@ body {
     0%, 100% { transform: translate(0, 0) rotate(0deg); }
     50% { transform: translate(-15px, -20px) rotate(15deg); }
 }
-
 @keyframes volarMR2 {
     0%, 100% { transform: translate(0, 0) rotate(0deg); }
     50% { transform: translate(-20px, -15px) rotate(-10deg); }
 }
-
 @keyframes volarMR3 {
     0%, 100% { transform: translate(0, 0) rotate(0deg); }
     50% { transform: translate(15px, -18px) rotate(12deg); }
@@ -582,11 +573,14 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* ===== RESPONSIVE ===== */
+/* ===== RESPONSIVE - TABLETS ===== */
 @media (max-width: 1024px) {
     .titulo-inicio { font-size: 4rem; }
-    #ramo-construccion { width: 350px; height: 400px; }
-    .flores-ramo { width: 350px; height: 350px; }
+    #ramo-construccion { 
+        width: 350px; 
+        height: 400px; 
+        margin: 0 auto;
+    }
     .flor-individual { font-size: 1.8rem; }
     .mensaje-display { font-size: 2.5rem; }
     .mensaje-display.tipo-titulo { font-size: 3rem; }
@@ -597,20 +591,38 @@ body {
     .flor-borde { font-size: 2rem; }
 }
 
+/* ===== RESPONSIVE - MÓVILES ===== */
 @media (max-width: 768px) {
     .titulo-inicio { font-size: 3rem; }
     .subtitulo-inicio { font-size: 1.5rem; }
     .descripcion-inicio { font-size: 1rem; }
     #btn-iniciar { padding: 15px 40px; font-size: 1.2rem; }
     
-    #ramo-construccion { width: 300px; height: 350px; }
-    .flores-ramo { width: 300px; height: 300px; }
-    .flor-individual { font-size: 1.5rem; }
-    .envoltorio-ramo { width: 140px; height: 110px; bottom: 10px; }
-    .corona-ramo { font-size: 3rem; top: 10px; }
+    /* RAMO CENTRADO EN MÓVILES */
+    #ramo-construccion { 
+        width: 320px; 
+        height: 360px;
+        margin: 0 auto;
+    }
+    
+    .envoltorio-ramo { 
+        width: 140px; 
+        height: 110px;
+        bottom: 10px;
+    }
+    
+    .corona-ramo { 
+        font-size: 3rem; 
+        top: 10px;
+    }
     .mariposa-ramo { font-size: 1.8rem; }
     
-    .mensaje-display { font-size: 1.8rem; white-space: normal; padding: 15px 25px; }
+    .mensaje-display { 
+        font-size: 1.8rem; 
+        white-space: normal; 
+        padding: 15px 25px; 
+        max-width: 90%;
+    }
     .mensaje-display.tipo-titulo { font-size: 2.2rem; }
     
     .nombre-linea1 { font-size: 1.8rem; }
@@ -631,64 +643,23 @@ body {
     
     .mariposa { font-size: 2rem; }
 }
-/* ===== RESPONSIVE - MÓVILES PEQUEÑOS ===== */
+
 @media (max-width: 480px) {
     .titulo-inicio { font-size: 2.5rem; }
     .subtitulo-inicio { font-size: 1.2rem; }
     
-    /* CORREGIR EL RAMO - CENTRADO PERFECTO */
+    /* RAMO AÚN MÁS PEQUEÑO EN MÓVILES PEQUEÑOS */
     #ramo-construccion { 
         width: 280px; 
         height: 320px;
-        position: relative;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-    
-    .flores-ramo { 
-        width: 280px; 
-        height: 280px;
-        position: absolute;
-        top: 0;
-        left: 0;
-        transform: none !important; /* Eliminar transform que desplaza */
-    }
-    
-    .flor-individual { 
-        font-size: 1.3rem; 
+        margin: 0 auto;
     }
     
     .envoltorio-ramo { 
         width: 120px; 
         height: 90px;
-        left: 50%;
-        transform: translateX(-50%) scale(0);
-        bottom: 10px;
     }
-    
-    .envoltorio-ramo.aparecer {
-        transform: translateX(-50%) scale(1);
-    }
-    
-    .circulo-flores { 
-        width: 200px; 
-        height: 200px;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-    
-    .flor-circulo { font-size: 1.3rem; }
-    
-    .corona-ramo { 
-        font-size: 2.5rem;
-        left: 50%;
-        transform: translateX(-50%) scale(0);
-        top: 0;
-    }
-    
-    .corona-ramo.aparecer {
-        transform: translateX(-50%) scale(1);
-    }
+    .corona-ramo { font-size: 2.5rem; }
     
     .mensaje-display { font-size: 1.5rem; padding: 12px 20px; }
     .mensaje-display.tipo-titulo { font-size: 1.8rem; }
