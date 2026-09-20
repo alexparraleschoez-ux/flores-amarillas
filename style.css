@@ -631,16 +631,64 @@ body {
     
     .mariposa { font-size: 2rem; }
 }
-
+/* ===== RESPONSIVE - MÓVILES PEQUEÑOS ===== */
 @media (max-width: 480px) {
     .titulo-inicio { font-size: 2.5rem; }
     .subtitulo-inicio { font-size: 1.2rem; }
     
-    #ramo-construccion { width: 280px; height: 320px; }
-    .flores-ramo { width: 280px; height: 280px; }
-    .flor-individual { font-size: 1.3rem; }
-    .envoltorio-ramo { width: 120px; height: 90px; }
-    .corona-ramo { font-size: 2.5rem; }
+    /* CORREGIR EL RAMO - CENTRADO PERFECTO */
+    #ramo-construccion { 
+        width: 280px; 
+        height: 320px;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .flores-ramo { 
+        width: 280px; 
+        height: 280px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: none !important; /* Eliminar transform que desplaza */
+    }
+    
+    .flor-individual { 
+        font-size: 1.3rem; 
+    }
+    
+    .envoltorio-ramo { 
+        width: 120px; 
+        height: 90px;
+        left: 50%;
+        transform: translateX(-50%) scale(0);
+        bottom: 10px;
+    }
+    
+    .envoltorio-ramo.aparecer {
+        transform: translateX(-50%) scale(1);
+    }
+    
+    .circulo-flores { 
+        width: 200px; 
+        height: 200px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .flor-circulo { font-size: 1.3rem; }
+    
+    .corona-ramo { 
+        font-size: 2.5rem;
+        left: 50%;
+        transform: translateX(-50%) scale(0);
+        top: 0;
+    }
+    
+    .corona-ramo.aparecer {
+        transform: translateX(-50%) scale(1);
+    }
     
     .mensaje-display { font-size: 1.5rem; padding: 12px 20px; }
     .mensaje-display.tipo-titulo { font-size: 1.8rem; }
@@ -653,4 +701,50 @@ body {
     .imagen-ramo-final { width: 150px; height: 150px; }
     
     .flor-borde { font-size: 1.2rem; }
+}
+
+/* ===== TABLETS ===== */
+@media (min-width: 481px) and (max-width: 768px) {
+    .titulo-inicio { font-size: 3rem; }
+    .subtitulo-inicio { font-size: 1.5rem; }
+    
+    #ramo-construccion { 
+        width: 320px; 
+        height: 360px;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .flores-ramo { 
+        width: 320px; 
+        height: 320px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: none !important;
+    }
+    
+    .flor-individual { font-size: 1.6rem; }
+    
+    .envoltorio-ramo { 
+        width: 140px; 
+        height: 110px;
+        left: 50%;
+        transform: translateX(-50%) scale(0);
+    }
+    
+    .envoltorio-ramo.aparecer {
+        transform: translateX(-50%) scale(1);
+    }
+    
+    .corona-ramo { 
+        font-size: 3rem;
+        left: 50%;
+        transform: translateX(-50%) scale(0);
+    }
+    
+    .corona-ramo.aparecer {
+        transform: translateX(-50%) scale(1);
+    }
 }
